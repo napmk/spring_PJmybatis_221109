@@ -1,5 +1,6 @@
 package com.napmkmk.freeboard.controller;
-import com.napmkmk.bts221106.dto.ContentDto;
+import com.napmkmk.freeboard.dto.FreeboardDto;
+
 import com.napmkmk.freeboard.dao.mapper.IDao;
 import com.napmkmk.freeboard.dto.MemberDto;
 
@@ -152,7 +153,7 @@ public class FBoardController {
 		String ftitle = request.getParameter("ftitle");
 		String fcontent = request.getParameter("fcontent");
 		
-		dao.writedao(mid, mname, ftitle,fcontent);
+		dao.writeDao(mid, mname, ftitle,fcontent);
 		
 		return "redirect:list";
 	}
@@ -166,14 +167,18 @@ public class FBoardController {
 	      return"logOut";
 	   }
 	
+	
 	@RequestMapping(value = "list")
-	   public String list(HttpServletRequest request, Model model) {
-	      
-		ArrayList<freeboardDto> dtos = dao.listDao();
+	public String list(Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		ArrayList<FreeboardDto> dtos = dao.listDao();
 		model.addAttribute("list", dtos);
 		
-	      
-	      return"list";
-	   }
+		return "list";
+	}
 	
+	
+
 }

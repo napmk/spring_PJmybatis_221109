@@ -19,15 +19,15 @@
 			<th>조회수</th>
 			<th>등록일</th>
 		</tr>
-		<c:forEach items="${list}" var="fbdto">
-			<tr>
-				<td>${fbdto.fnum }</td>
-				<td>${fbdto.fid }</td>
-				<td>${fbdto.ftitle}</td>
-				<td>${fbdto.fid }</td>
-				<td>${fbdto.fhit }</td>
-				<td>${fbdto.fdate }</td>
-			</tr>
+		<c:forEach items="${list }" var="fbdto">
+		<tr>
+			<td>${fbdto.fnum }</td>
+			<td>${fbdto.fid }</td>
+			<td>${fbdto.ftitle }</td>
+			<td>${fbdto.fname }</td>
+			<td>${fbdto.fhit }</td>
+			<td>${fbdto.fdate }</td>
+		</tr>
 		</c:forEach>
 		<tr>
 			<td colspan="6" align="right"><a href="writeForm">글쓰기</a></td>

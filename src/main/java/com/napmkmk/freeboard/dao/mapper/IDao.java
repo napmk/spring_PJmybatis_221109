@@ -14,8 +14,7 @@ public interface IDao {
 	public MemberDto memberInfoDao(String mid); //가입된 회원정보를 불러옴
 	
 	// board 관련 메서드
-	public void writedao(String mid,String mname, String ftitle,String fcontent);
-	
+	public void writeDao(String mid,String mname, String ftitle,String fcontent);
 	public ArrayList<FreeboardDto> listDao();
 	
 }
