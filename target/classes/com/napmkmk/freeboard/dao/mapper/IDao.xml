@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.napmkmk.freeboard.dao.mapper.IDao">
+		<insert id="joinMemberDao">
+			INSERT INTO member (mid, mpw, mname, memail) VALUES (#{param1},#{param2},#{param3},#{param4})
+		</insert>
+		<select id="checkIdDao" resultType="int">
+			SELECT COUNT(*) FROM member WHERE mid=#{param1} <!-- id 가 있으면 COUNT갯수를 세어라. 그래서 있으면 1 없으면 0으로 표현  -->
+		</select>
+		<select id="checkPwDao" resultType="int">
+			SELECT COUNT(*) FROM member WHERE mid=#{param1} AND mpw=#{param2}  <!-- 아이디와 비번 2개를 체크해서 확인  -->
+		</select>
+	
+	</mapper>
