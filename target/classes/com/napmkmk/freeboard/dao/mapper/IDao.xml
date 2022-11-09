@@ -5,6 +5,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="com.napmkmk.freeboard.dao.mapper.IDao">
+		<!-- 회원관리 SQL -->
 		<insert id="joinMemberDao">
 			INSERT INTO member (mid, mpw, mname, memail) VALUES (#{param1},#{param2},#{param3},#{param4})
 		</insert>
@@ -14,5 +15,13 @@
 		<select id="checkPwDao" resultType="int">
 			SELECT COUNT(*) FROM member WHERE mid=#{param1} AND mpw=#{param2}  <!-- 아이디와 비번 2개를 체크해서 확인  -->
 		</select>
-	
+		<select id="memberInfoDao" resultType="com.napmkmk.freeboard.dto.MemberDto">
+			SELECT * FROM member WHERE mid=#{param1}   
+		</select>
+		
+		<!-- 게시판 관리 SQL -->
+		<insert id="writedao">
+			INSERT INTO freeboard(fnum, fid, fname,  ftitle, fcontent ,fhit) 
+			VALUES(freeboard_seq.nextval, #{param1},#{param2},#{param3},#{param4}, 0)
+		</insert>
 	</mapper>
