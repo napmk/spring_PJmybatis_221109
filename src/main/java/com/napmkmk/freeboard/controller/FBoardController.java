@@ -106,7 +106,7 @@ public class FBoardController {
 		String sid = (String) session.getAttribute("sessionId"); //로그인 하려면 서버세션에 저장해놓아야 하므로
 		// 메게변수에 넣어주기 위한 sid
 		
-		if(sid.equals(null)) {
+		if(sid == null) {
 			return "redirect:login";
 		} else {
 			MemberDto dto= dao.memberInfoDao(sid); // 메게변수에 넣어주기 위한 sid  밑에 이름이 겹쳐서 sid
@@ -154,4 +154,12 @@ public class FBoardController {
 		return "redirect:list";
 	}
 	
+	@RequestMapping(value = "logOut")
+	   public String logOut(HttpServletRequest request) {
+	      
+	      HttpSession session = request.getSession();
+	      session.invalidate();//섹션삭제 즉 로그아웃
+	      
+	      return"logOut";
+	   }
 }
