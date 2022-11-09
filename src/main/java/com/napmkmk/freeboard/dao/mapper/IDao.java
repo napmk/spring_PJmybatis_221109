@@ -1,5 +1,8 @@
 package com.napmkmk.freeboard.dao.mapper;
 
+import java.util.ArrayList;
+
+import com.napmkmk.freeboard.dto.FreeboardDto;
 import com.napmkmk.freeboard.dto.MemberDto;
 
 public interface IDao {
@@ -12,5 +15,7 @@ public interface IDao {
 	
 	// board 관련 메서드
 	public void writedao(String mid,String mname, String ftitle,String fcontent);
+	
+	public ArrayList<FreeboardDto> listDao();
 	
 }

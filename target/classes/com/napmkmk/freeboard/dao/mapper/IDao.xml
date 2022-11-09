@@ -24,4 +24,8 @@
 			INSERT INTO freeboard(fnum, fid, fname,  ftitle, fcontent ,fhit) 
 			VALUES(freeboard_seq.nextval, #{param1},#{param2},#{param3},#{param4}, 0)
 		</insert>
+		<select id="listDao" resultType="com.napmkmk.freeboard.dto.MemberDto">
+		SELECT * FROM mvc_board ORDER BY fid DESC
+	</select>
+	
 	</mapper>

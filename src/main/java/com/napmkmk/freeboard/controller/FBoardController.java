@@ -1,6 +1,9 @@
 package com.napmkmk.freeboard.controller;
+import com.napmkmk.bts221106.dto.ContentDto;
 import com.napmkmk.freeboard.dao.mapper.IDao;
 import com.napmkmk.freeboard.dto.MemberDto;
+
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -162,4 +165,15 @@ public class FBoardController {
 	      
 	      return"logOut";
 	   }
+	
+	@RequestMapping(value = "list")
+	   public String list(HttpServletRequest request, Model model) {
+	      
+		ArrayList<freeboardDto> dtos = dao.listDao();
+		model.addAttribute("list", dtos);
+		
+	      
+	      return"list";
+	   }
+	
 }
