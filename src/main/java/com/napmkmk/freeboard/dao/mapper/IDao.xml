@@ -25,9 +25,17 @@
 			VALUES(freeboard_seq.nextval, #{param1},#{param2},#{param3},#{param4}, 0)
 		</insert>
 		<select id="listDao" resultType="com.napmkmk.freeboard.dto.FreeboardDto">
-			SELECT * FROM freeboard ORDER BY fnum DESC
+			SELECT * FROM freeboard ORDER BY fnum DESC <!-- -ASC 는 반대 -->
 		</select>
-		
+		<select id="contentView" resultType="com.napmkmk.freeboard.dto.FreeboardDto">
+			SELECT * FROM freeboard WHERE fnum=#{param1}
+		</select>
+		<update id="modifyDao">
+     		 UPDATE freeboard SET fnum=#{param1},fname=#{param2}, ftitle=#{param3}, fcontent=#{param4} where fnum=#{param1}
+   		</update>
+		<update id="upHitDao"> 
+     		UPDATE freeboard SET fhit=fhit+1 WHERE fnum=#{param1}
+     	</update>
 	
 	
 	</mapper>

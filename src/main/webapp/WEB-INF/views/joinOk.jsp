@@ -22,5 +22,9 @@
 	<h2>회원 가입을 축하드립니다.</h2>
 	<h2>${mname }님 반갑습니다.</h2>
 	
+	<a href="writeForm">글쓰기</a>
+	<a href="list">글목록</a>
+	<a href="logOut">로그아웃</a>
+	
 </body>
 </html>

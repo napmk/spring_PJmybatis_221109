@@ -169,16 +169,112 @@ public class FBoardController {
 	
 	
 	@RequestMapping(value = "list")
-	public String list(Model model) {
+	public String list(HttpServletRequest request,Model model) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
 		ArrayList<FreeboardDto> dtos = dao.listDao();
+		
+		
+		HttpSession session = request.getSession(); //현재 세션가져 오기
+		
+		String sid = (String) session.getAttribute("sessionId");//현재 세션에 로그인 되어 있는 아이디 가져오기
+		
+		
+		
+		int idflag = 0; //초기값 0 이고 
+		
+		if((sid != null) ) { //로그인이 되어있는 경우
+			idflag = 1;
+		
+			model.addAttribute("sid", sid); //모델에 싣고 보내자
+		
+			
+		}
+		model.addAttribute("idflag",idflag); //1이면 로그인 0이면 로그인 아님
+
+		model.addAttribute("boardSum",dtos.size()); // 게시판 리스트 갯수
 		model.addAttribute("list", dtos);
 		
 		return "list";
 	}
 	
+	@RequestMapping(value = "content_view")
+	public String content_view(HttpServletRequest request,Model model) { //받을땐 리퀘스트 보낼땐 모델
+		
+		String fnum = request.getParameter("fnum");
+		
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		FreeboardDto  dtos = dao.contentView(fnum);
+		
+		HttpSession session = request.getSession(); //현재 세션가져 오기
+		
+		String sid = (String) session.getAttribute("sessionId");//현재 세션에 로그인 되어 있는 아이디 가져오기
+		
+		String fid = dtos.getFid(); //현재 보고 있는 글을 쓴 아이디
+		
+		int idflag = 0; //초기값 0 이고 
+		
+		if((sid != null) && (sid.equals(fid))) {
+			idflag = 1;
+			
+		}
+		model.addAttribute("idflag",idflag); //idflag ==  1이면 수정 삭제 권한 설정 
+		
+		
+		dao.upHitDao(fnum);
+		model.addAttribute("viewdto", dtos);
+		
+		return "content_view";
+	}
+	
+	@RequestMapping(value = "delete")
+		public String delete(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String fnum = request.getParameter("fnum");
+		dao.deleteDao(fnum); 
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "modifyView")
+	public String modifyView(HttpServletRequest request, Model model) {
+		
+		String fnum = request.getParameter("fnum");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		FreeboardDto fbdto = dao.contentView(fnum);
+		
+		model.addAttribute("fbdto", fbdto);
+		
+		return "modifyView";
+	}
+	
+	@RequestMapping(value = "modify")
+	   public String modify(HttpServletRequest request) {
+	      String fnum = request.getParameter("fnum");
+	      String fname = request.getParameter("fname");
+	      String ftitle = request.getParameter("ftitle");
+	      String fcontent = request.getParameter("fcontent");
+	       
+	       IDao dao = sqlSession.getMapper(IDao.class);
+	      
+	       dao.modifyDao(fnum, ftitle, fcontent, fname);
+	       
+	      
+	      return "redirect:list";
+	   }
+
+	
+	
+	@RequestMapping(value = "/")
+	public String home() {
+		return "redirect:list";
+	}
 	
 
 }

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class FreeboardDto {
 	private int fnum; //자유게시판번호
-	private int fid; //글쓴이아이디
+	private String fid; //글쓴이아이디
 	private String fname; //글쓴이
 	private String ftitle; //게시판제목
 	private String fcontent; //게시판내용
@@ -18,7 +18,7 @@ public class FreeboardDto {
 	}
 
 
-	public FreeboardDto(int fnum, int fid, String fname, String ftitle, String fcontent, Timestamp fdate, int fhit) {
+	public FreeboardDto(int fnum, String fid, String fname, String ftitle, String fcontent, Timestamp fdate, int fhit) {
 		super();
 		this.fnum = fnum;
 		this.fid = fid;
@@ -40,12 +40,12 @@ public class FreeboardDto {
 	}
 
 
-	public int getFid() {
+	public String getFid() {
 		return fid;
 	}
 
 
-	public void setFid(int fid) {
+	public void setFid(String fid) {
 		this.fid = fid;
 	}
 

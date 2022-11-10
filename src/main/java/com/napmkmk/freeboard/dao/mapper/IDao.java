@@ -16,5 +16,10 @@ public interface IDao {
 	// board 관련 메서드
 	public void writeDao(String mid,String mname, String ftitle,String fcontent);
 	public ArrayList<FreeboardDto> listDao();
+	public FreeboardDto contentView(String fnum);//글 내용보기 (글 하나를 받을 준비해야함.)
+	public void deleteDao(String fnum); //글삭제
+//	public FreeboardDto mviewDto(String fnum); ??  몰라
+	public void modifyDao(String fnum, String fname, String ftitle,String fcontent);//글수정
+	public void upHitDao(String fnum);
 	
 }
