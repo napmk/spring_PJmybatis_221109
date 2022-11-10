@@ -24,7 +24,7 @@
 			} else { //아니면 로그인 되어있음
 		%>
 	 	
-		${sid }님 로그인 중입니다.
+		${sid }님 로그인 중입니다. <input type="button" value="로그아웃" onclick="javascript:window.location='logOut'">
 		<%
 			}
 		%>
